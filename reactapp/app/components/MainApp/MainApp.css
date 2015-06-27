@@ -1,0 +1,29 @@
+/*Code help from http://codepen.io/oknoblich/pen/klnjw */
+
+.main-wrapper{
+  display: flex; 
+  min-height: 100%;
+}
+
+.sidebar {
+    display:flex;
+    width: 100%;
+    padding-right: 100px;
+    justify-content: flex-end;
+    position: absolute;
+}
+
+.content-wrapper {
+  flex: 1;
+  background: #fff;
+  box-shadow: 0 0 5px rgba(0,0,0,1);
+  transform: translate3d(0,0,0);
+  transition: transform .3s;
+}
+
+
+
+
+.slide-left{
+    transform: translate3d(-220px,0,0);
+}

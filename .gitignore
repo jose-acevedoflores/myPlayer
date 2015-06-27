@@ -1,0 +1,7 @@
+*.pyc
+*.log
+coverage
+node_modules/
+backend/flask-app/instance
+backend/flask-app/static/dist
+backend/flask-app/static/audio
