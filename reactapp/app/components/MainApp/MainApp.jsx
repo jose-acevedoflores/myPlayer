@@ -16,7 +16,9 @@ var App = React.createClass({
         this.setState({slide:true})
     },
     hideRight:function(){
-        this.setState({slide:false})
+        if(this.state.slide){
+            this.setState({slide:false, currentTab:1})
+        }
     },
     getInitialState: function () {        
         return {
@@ -67,7 +69,7 @@ var App = React.createClass({
 
     render: function(){
         return(
-            <div className="main-wrapper">
+            <div className="main-wrapper" onClick={this.hideRight}>
                 <div className="sidebar">
                     <PlaylistMenu ref="right" hideRight={this.hideRight} selectPlaylist={this.selectPlaylist} />
                 </div>
@@ -77,8 +79,7 @@ var App = React.createClass({
                         currentTab={this.state.currentTab}
                         tabList={this.state.tabList}
                         changeTab={this.changeTab} 
-                        showRight={this.showRight}
-                        hideRight={this.hideRight}/>
+                        showRight={this.showRight}/>
                     <SearchTabContent currentTab={this.state.currentTab} handleSearch={this.handleSearch}/>
                     <Results resultsList={this.state.filteredList}/>
                 </div>
