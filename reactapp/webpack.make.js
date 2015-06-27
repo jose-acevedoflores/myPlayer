@@ -58,7 +58,7 @@ module.exports = function makeWebpackConfig (options) {
   } else {
     config.output = {
       // Absolute output directory
-      path: path.join(__dirname, '/../../static/dist/'),
+      path: path.join(__dirname, '/../backend/flask-app/static/dist'),
 
       // Output path from the view of the page
       // Uses webpack-dev-server in development
