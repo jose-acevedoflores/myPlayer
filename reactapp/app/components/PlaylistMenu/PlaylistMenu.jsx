@@ -36,14 +36,20 @@ var PlaylistMenu = React.createClass({
         console.log('render')
         
         return (
-                <div >
+                <div className='nav'>
+                <div className="title">
+                    Playlists
+                </div>
                     <i className={this.state.loading_playlists ? "fa fa-spinner fa-4x fa-spin " : null  }></i>
+                    <ul>
                     {this.state.playlists.map(function(playlist){
                         return(
                                 <PlaylistMenuItem key={playlist.id} playlist={playlist} selectPlaylist={this.props.selectPlaylist}/>
+                                
                             )
                         }.bind(this))     
                     }
+                    </ul>
                 </div>
         )
     }

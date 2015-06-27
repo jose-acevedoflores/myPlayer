@@ -6,7 +6,11 @@ var PlaylistMenuItem = React.createClass({
     },
 
     render: function() {
-        return <div className="menu-item" onClick={this.handleClick.bind(this, this.props.playlist)}>{this.props.playlist.name}</div>;
+        return(
+            <li>
+                <a className="menu-item" onClick={this.handleClick.bind(this, this.props.playlist)}>{this.props.playlist.name}</a>
+            </li>
+         )
     }
 });
 
