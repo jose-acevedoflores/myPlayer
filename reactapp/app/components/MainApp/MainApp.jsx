@@ -13,14 +13,10 @@ var PlaylistMenu = require('../PlaylistMenu')
 
 var App = React.createClass({
     showRight: function() {
-        console.log('showRight')
-        document.addEventListener("click", this.hideRight);
         this.setState({slide:true})
     },
     hideRight:function(){
-        console.log('hideRight')
         this.setState({slide:false})
-        document.removeEventListener("click", this.hideRight);
     },
     getInitialState: function () {        
         return {
@@ -81,7 +77,8 @@ var App = React.createClass({
                         currentTab={this.state.currentTab}
                         tabList={this.state.tabList}
                         changeTab={this.changeTab} 
-                        showRight={this.showRight}/>
+                        showRight={this.showRight}
+                        hideRight={this.hideRight}/>
                     <SearchTabContent currentTab={this.state.currentTab} handleSearch={this.handleSearch}/>
                     <Results resultsList={this.state.filteredList}/>
                 </div>
