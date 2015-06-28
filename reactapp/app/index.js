@@ -1,5 +1,5 @@
 require('normalize.css')
-require('./css/styles.css')
+// require('./css/styles.css')
 
 const debug = require('debug')
 const React = require('react')
@@ -10,10 +10,4 @@ const log = debug('application:bootstrap')
 if (process.env.NODE_ENV !== 'production') {
   debug.enable('application:*')
 }
-
-
-log('mounting application')
-React.render(<App/>, () => {
-  log('finished mounting application')
-})
 
