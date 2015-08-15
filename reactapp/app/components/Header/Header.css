@@ -8,3 +8,30 @@
   height: 50px;
   background-color: #00a087;
 }
+
+.tabs {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.tabs a, .tabs a:visited {
+  color: #ffffff;
+}
+
+
+.search {
+    flex-grow:1;
+    text-align: center;
+}
+
+.selected {
+    border-bottom: thick solid #ffffff;
+}
+
+.playlist{
+    flex-grow:1;
+    text-align: center;
+}
