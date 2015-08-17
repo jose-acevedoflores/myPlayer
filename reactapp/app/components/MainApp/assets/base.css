@@ -10,7 +10,7 @@
 /* BASIC */
 body {
   font: normal 18px/22px "Varela Round", sans-serif;
-  background-color: #e9ffff;
+  background-color: #e0e0e0;
   color: #2e2e2e;
 }
 h1, h2 {
@@ -41,7 +41,7 @@ a:link, a:visited, a:hover, a:active {
 
 .content {
   position: relative;
-  background: #464646 no-repeat center center fixed;
+  background: #e0e0e0 no-repeat center center fixed;
   background-size: cover;
  }
 .description, .some-related-articles {
