@@ -43,6 +43,22 @@ a.sitename, a:visited.sitename {
   text-decoration: none;
 }
 
+.main-wrapper{
+    width:100%;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
+
+.slide{
+    -webkit-transition:all .2s linear;
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.main-wrapper .slide{
+    -webkit-transform: translate3d(85%,0,0);
+}
+
 
 @media only screen and (max-width: 800px) {
   .menu { 

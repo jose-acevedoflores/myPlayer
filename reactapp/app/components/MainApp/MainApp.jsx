@@ -6,16 +6,23 @@ var SearchBar = require('../SearchBar')
 var React = require('react')
 
 var App = React.createClass({
-
+   getInitialState: function () {        
+        return {
+            currentTab: 1
+        };
+    },
+    tabChange: function(currentTab){
+        this.setState({currentTab:currentTab})
+    },
     render: function(){
         return(
             <div className="main-wrapper">
                 
-                <Header/>
-                <SearchBar />
+                <Header currentTab={this.state.currentTab} tabChange={this.tabChange}/>
+                <SearchBar/>
                 
 
-                <Player />
+                <Player/>
             </div>
         );
     }
