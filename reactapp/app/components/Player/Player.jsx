@@ -8,7 +8,7 @@ var Player = React.createClass({
     render: function(){
         return(
 
-                <nav className="fixed-nav-bar-bottom">
+                <nav className={this.props.slide  ? "fixed-nav-bar-bottom slide":"fixed-nav-bar-bottom no-slide"}>
                   <div id="menu" className="menu">
                     <a className="sitename" href="fixed-navigation-bar.html">Fixed Nav Bar</a>
 

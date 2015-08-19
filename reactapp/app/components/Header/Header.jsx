@@ -12,7 +12,7 @@ var Header = React.createClass({
     render: function(){
         return(
 
-              <nav className="fixed-nav-bar" >
+              <nav className={this.props.slide ? "fixed-nav-bar slide" :"fixed-nav-bar no-slide"}>
                 <div className="tabs"> 
                   <div className={this.props.currentTab == 1 ? "search selected" : "search"} onClick={this.handleSearch}>
                     <a> Search </a>

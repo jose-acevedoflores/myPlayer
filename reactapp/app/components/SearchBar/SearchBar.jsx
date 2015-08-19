@@ -16,8 +16,10 @@ var SearchBar = React.createClass({
     render: function(){
         return(
 
-            <div className= "search-field" >
-                <input type="text" className="mui-form-control" placeholder="Search"/>
+            <div className= {this.props.slide  ? "search-field-div slide" : "search-field-div no-slide" }>
+                <div className="size-search-field">
+                    <input type="text" className="mui-form-control" placeholder="Search"/>
+                </div>
             </div>
 
         );

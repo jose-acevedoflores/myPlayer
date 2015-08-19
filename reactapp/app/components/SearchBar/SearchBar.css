@@ -1,6 +1,10 @@
-.search-field{
+.search-field-div{
+    background-color: #fff;
+    flex-grow:1;
+}
 
-    margin-top: 68px;
-    margin-right: 20px;
-    margin-left: 20px;
+.size-search-field{
+    padding-top: 68px;
+    padding-right: 20px;
+    padding-left: 20px;
 }
