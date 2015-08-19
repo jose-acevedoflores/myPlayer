@@ -16,7 +16,7 @@ var SearchBar = React.createClass({
     render: function(){
         return(
 
-            <div className="search-field">
+            <div className= "search-field" >
                 <input type="text" className="mui-form-control" placeholder="Search"/>
             </div>
 

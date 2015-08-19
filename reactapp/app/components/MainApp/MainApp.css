@@ -45,18 +45,22 @@ a.sitename, a:visited.sitename {
 
 .main-wrapper{
     width:100%;
+    height: 100%;
     position:absolute;
     left:0px;
     top:0px;
+    background-color: #fff;
 }
+
 
 .slide{
     -webkit-transition:all .2s linear;
-    -webkit-transform: translate3d(0,0,0);
+    -webkit-transform: translate3d(-220px,0,0);
 }
 
-.main-wrapper .slide{
-    -webkit-transform: translate3d(85%,0,0);
+.no-slide{
+  transform: translate3d(0,0,0);
+  transition: transform .3s;
 }
 
 
