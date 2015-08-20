@@ -4,26 +4,33 @@ var Player = require('../Player')
 var Header = require('../Header')
 var SearchBar = require('../SearchBar')
 var PlaylistMenu = require('../PlaylistMenu')
+var ResultsList = require('../ResultsList')
 var React = require('react')
 
 
 var App = React.createClass({
     selectPlaylist: function(playlist){
-        console.log(playlist)
-        // fetch('/get_playlist_data/'+JSON.stringify(playlist))
-        //   .then(function(response) {
-        //     return response.text()
-        //   }).then(function(body) {
-        //     var playlist_data = JSON.parse(body).results
-        //     console.log(playlist_data)
-        //     this.setState({resultsList: playlist_data, filteredList: playlist_data})
-        //   }.bind(this));
+        // Show the loading gif
+        this.setState({loading_playlist:true})
+        fetch('/get_playlist_data/'+JSON.stringify(playlist))
+          .then(function(response) {
+            return response.text()
+          }).then(function(body) {
+            var playlist_data = JSON.parse(body).results
+            console.log(playlist_data)
+            // Get rid of the loading gif
+            this.setState({loading_playlist:false})
+            this.setState({resultsList: playlist_data, filteredList: playlist_data})
+          }.bind(this));
 
     },
    getInitialState: function () {        
         return {
             currentTab: 1,
-            slide: false
+            slide: false,
+            resultsList: [],
+            filteredList: [],
+            loading_playlist: false
         };
     },
     tabChange: function(currentTab){
@@ -37,38 +44,29 @@ var App = React.createClass({
         document.removeEventListener("click", this.hidePlaylistMenu)
         this.setState({slide:false})
     },
+    filterList:function(searchString, event_identifier){
+        if(event_identifier == "key_event"){
+            // Initialize the list with all the results
+            var filteredList = this.state.resultsList
+            // Check if there is a string to search in the results list
+            if(searchString.length > 0){
+                 filteredList = this.state.resultsList.filter(function(item){
+                    return item.name.toLowerCase().match( searchString );
+                  });
+            }
+            // If there is no string in the search field then filtered list is equal to all the results
+            this.setState({filteredList: filteredList})
+        }
+    },
     render: function(){
         return(
             <div> 
                 <div className={this.state.slide ? "main-wrapper" : "main-wrapper"}>
                     <PlaylistMenu selectPlaylist={this.selectPlaylist}/>
                     <Header currentTab={this.state.currentTab} tabChange={this.tabChange} slide={this.state.slide}/>
-                    <SearchBar slide={this.state.slide}/>
-                
-                     <section className={this.state.slide ? "mainbody slide" : "mainbody no-slide"}>
-                  <div className="description">
-                    <h1>Fixed Navigation Bar</h1>
-                    <p className="summary">A fixed-position (or "sticky") top navigation bar. Scroll this page to see the top navigation bar stay in place.</p>
-                    <a className="button" href="//sixrevisions.com/css/fixed-navigation-bar/">Read the tutorial</a>
-                    <a className="button" href="//github.com/sixrevisions/fixed-navigation-bar">View Source on GitHub</a>
-                  </div>
+                    <SearchBar slide={this.state.slide} searchResultsList={this.filterList} />
 
-                  <h1>Articles About Website Navigation</h1>
-                  <p>Here are links (with excerpts) to five Six Revisions articles that talk about website navigation. (Because filler content/lorem ipsum sucks.)</p>
-                  <h2><a href="//sixrevisions.com/user-interface/navigation-design-patterns/">Guide to Website Navigation Design Patterns</a></h2>
-                  <p>Site navigation has a wide variety of common and familiar design patterns that can be used as a foundation for building effective information architecture for a website. This guide covers popular site navigation design patterns. For each site navigation design pattern, we discuss its common characteristics, its drawbacks, and when best to use it.</p>
-                  <h2><a href="//sixrevisions.com/user-interface/is-it-time-to-rethink-website-navigation/">Is It Time To Rethink Website Navigation?</a></h2>
-                  <p>One of the many beautiful things about web design is the near-limitless options available to us. Yet, still, our navigation systems seem stuck into the existing preformed solutions. For small, personal sites, a simple top horizontal navigation bar is the typical option.</p>
-                  <h2><a href="//sixrevisions.com/web-standards/trying-navigate-website-navigation/">Trying to Navigate Website Navigation</a></h2>
-                  <p>Having clearly labeled navigation types to choose from can help people organize the information more easily. For us professionals, having standardized nomenclature allow us to discuss and explore the subject.  Even information architecture (IA) experts like Lou Rosenfeld, Steve Krug, Jesse James Garrett, and Jakob Nielsen dont agree as to what "secondary navigation" is.</p>
-                  <h2><a href="//sixrevisions.com/user-interface/responsive-menus/">8 Ways to Add a Responsive Navigation Menu on Your Site</a></h2>
-                  <p>There are plenty of techniques for implementing responsive navigation menus on your site. This article talks about eight excellent open source projects for building responsive navigation menus. At the end of the article, you will find a summary table that has links to the official site, demos, usage guide, and official open source repository for each project.</p>
-                  <h2><a href="http://sixrevisions.com/usabilityaccessibility/information-architecture-101-techniques-and-best-practices/">Information Architecture 101: Techniques and Best Practices</a></h2>
-                  <p>Without a clear understanding of how information architecture (IA) works, we can end up creating sites that are more confusing than they need to be or, worse, make our content virtually inaccessible. This guide covers the fundamentals of information architecture for organizing website content. We will look into popular IA design patterns, best practices, design techniques, and case examples.</p>
-                  <p><a className="button-dark" href="//sixrevisions.com/css/fixed-navigation-bar/">Read the tutorial</a>
-                  <a className="button-dark" href="//github.com/sixrevisions/fixed-navigation-bar">View Source on GitHub</a></p>
-                </section>
-
+                    <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist}/>
 
                     <Player slide={this.state.slide}/>
                 </div>

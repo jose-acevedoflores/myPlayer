@@ -20,4 +20,4 @@ def source_parser():
 	""" 
 		Returns a list of strings to search in youtube.
 	"""
-	return [ "Seven Lions - Lose Myself (Audio) ft. Lynn Gunn", "Phantogram - Black Out Days"]
+	return [ "Seven Lions - Lose Myself (Audio) ft. Lynn Gunn", "Phantogram - Black Out Days", "Oliver Heldens Shaun Frank - Shades Of Grey", "chromeo jealous", "Major Lazer lean on","Mana La prision"]

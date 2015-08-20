@@ -7,8 +7,12 @@ var React = require('react')
 var SearchBar = React.createClass({
    getInitialState: function () {        
         return {
-            currentTab: 1
+            searchString: '' 
         };
+    },
+    handleChange:function(event){
+        this.setState({searchString:event.target.value});
+        this.props.searchResultsList(event.target.value, "key_event")
     },
     handleSearch: function(){
         this.setState({currentTab:1})
@@ -18,7 +22,7 @@ var SearchBar = React.createClass({
 
             <div className= {this.props.slide  ? "search-field-div slide" : "search-field-div no-slide" }>
                 <div className="size-search-field">
-                    <input type="text" className="mui-form-control" placeholder="Search"/>
+                    <input type="text" className="mui-form-control" placeholder="Search" onChange={this.handleChange}/>
                 </div>
             </div>
 

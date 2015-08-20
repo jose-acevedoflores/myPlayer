@@ -35,7 +35,7 @@ def search(query):
 			Dictionary with the required attributes (defined in the get_results )
     """
 
-    url = yt_api_url+"?"+yt_api_key+"&"+api_parameter+"&q="+query
+    url = yt_api_url+"?"+yt_api_key+"&"+api_parameter+"&q="+query.replace('&','')
     resp = requests.get(url)
 
     # Iterate over the results (right now returns the first youtube hit)

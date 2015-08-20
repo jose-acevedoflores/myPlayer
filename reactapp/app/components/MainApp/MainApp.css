@@ -54,9 +54,8 @@ a.sitename, a:visited.sitename {
     flex-direction:column;
 }
 
-.mainbody{
-  background-color: #fff
-}
+
+
 .slide{
     -webkit-transition:all .2s linear;
     -webkit-transform: translate3d(-220px,0,0);
