@@ -4,7 +4,9 @@ var React = require('react')
 
 var ResutlsList = React.createClass({
 
-
+    resultItemSelected: function(url_audio_to_request){
+        this.props.updatePlayer(url_audio_to_request)
+    },
     render: function() {
         return(
              <section className={this.props.slide ? "mainbody slide" : "mainbody no-slide"}>
@@ -13,7 +15,7 @@ var ResutlsList = React.createClass({
                     {this.props.resultsList.map(function(resultItem){
                         return (
                             
-                            <ResultsItem key={resultItem.id} resultsItem={resultItem} resultItemSelected={this.resultItemSelected}/>
+                            <ResultsItem key={resultItem.id} resultsItem={resultItem} resultItemSelected={this.resultItemSelected} />
                         )
                     }.bind(this))}
                     </div>

@@ -24,13 +24,14 @@ var App = React.createClass({
           }.bind(this));
 
     },
-   getInitialState: function () {        
+    getInitialState: function () {        
         return {
             currentTab: 1,
             slide: false,
             resultsList: [],
             filteredList: [],
-            loading_playlist: false
+            loading_playlist: false,
+            item_to_play: null
         };
     },
     tabChange: function(currentTab){
@@ -58,6 +59,18 @@ var App = React.createClass({
             this.setState({filteredList: filteredList})
         }
     },
+    updatePlayer:function(item_to_play){
+         console.log(this.props.item_to_play)
+         fetch('/audio_stream/'+item_to_play)
+          .then(function(response) {
+            return response.text()
+          }).then(function(body) {
+            console.log(body)
+
+            this.setState({item_to_play:"static/audio/"+ body+ ".mp3"})
+            this.refs.player_ref.reloadAudioTag()
+          }.bind(this));
+    },
     render: function(){
         return(
             <div> 
@@ -66,9 +79,9 @@ var App = React.createClass({
                     <Header currentTab={this.state.currentTab} tabChange={this.tabChange} slide={this.state.slide}/>
                     <SearchBar slide={this.state.slide} searchResultsList={this.filterList} />
 
-                    <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist}/>
+                    <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist} updatePlayer={this.updatePlayer}/>
 
-                    <Player slide={this.state.slide}/>
+                    <Player ref="player_ref" slide={this.state.slide} item_to_play={this.state.item_to_play}/>
                 </div>
             </div>
         );

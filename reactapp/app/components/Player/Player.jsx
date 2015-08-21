@@ -4,25 +4,24 @@ require('./Player.css')
 var React = require('react')
 
 var Player = React.createClass({
-
+    reloadAudioTag: function() {
+        React.findDOMNode(this.refs.audio_tag).load()
+    },
     render: function(){
-        return(
+
+         return(
 
                 <nav className={this.props.slide  ? "fixed-nav-bar-bottom slide":"fixed-nav-bar-bottom no-slide"}>
-                  <div id="menu" className="menu">
-                    <a className="sitename" href="fixed-navigation-bar.html">Fixed Nav Bar</a>
-
-                    <ul className="menu-items">
-                      <li><a href="//sixrevisions.com">Homeb</a></li>
-                      <li><a href="//sixrevisions.com/about/">Aboutb</a></li>
-                      <li><a href="//sixrevisions.com/contact/">Contactb</a></li>
-                      <li><a href="//twitter.com/sixrevisions">Twitterabsvdhksb</a></li>
-                      <li><a href="//www.facebook.com/sixrevisions">Facebookb</a></li>
-                  </ul>
-                  </div>
+                  <audio controls ref="audio_tag">
+                    <source src={this.props.item_to_play} type="audio/mpeg"/>
+                    Your browser does not support the audio element.
+                    TODO this.state.audio_url no funciona. Implement in a different way
+                    https://github.com/humanhighway/react-audio-player/tree/master/js
+                </audio>
                 </nav>
 
-        );
+        )
+       
     }
 });
 
