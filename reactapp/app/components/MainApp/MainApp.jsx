@@ -60,15 +60,12 @@ var App = React.createClass({
         }
     },
     updatePlayer:function(item_to_play){
-         console.log(this.props.item_to_play)
          fetch('/audio_stream/'+item_to_play)
           .then(function(response) {
             return response.text()
           }).then(function(body) {
-            console.log(body)
-
-            this.setState({item_to_play:"static/audio/"+ body+ ".mp3"})
-            this.refs.player_ref.reloadAudioTag()
+            var json_results = JSON.parse(body)
+            this.setState({item_to_play:"http://192.168.1.151:8080/audio/"+ json_results.results+ ".mp3"})
           }.bind(this));
     },
     render: function(){
@@ -81,7 +78,7 @@ var App = React.createClass({
 
                     <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist} updatePlayer={this.updatePlayer}/>
 
-                    <Player ref="player_ref" slide={this.state.slide} item_to_play={this.state.item_to_play}/>
+                    <Player  item_to_play={this.state.item_to_play} slide={this.state.slide} />
                 </div>
             </div>
         );

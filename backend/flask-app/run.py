@@ -35,8 +35,8 @@ def search(query):
 @app.route('/audio_stream/<videoId>')
 def audio_stream(videoId):
     yt_handler.download_vid(videoId, "https://www.youtube.com/watch?v="+videoId)
-    return videoId
+    return jsonify({"results":videoId})
 
 if __name__ == '__main__':
     playlists_manager.load_playlist_modules()
-    app.run(debug=True, host= '0.0.0.0',threaded=True)
+    app.run(host= '192.168.1.151')
