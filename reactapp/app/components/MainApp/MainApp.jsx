@@ -71,7 +71,7 @@ var App = React.createClass({
     render: function(){
         return(
             <div> 
-                <div className={this.state.slide ? "main-wrapper" : "main-wrapper"}>
+                <div className="main-wrapper">
                     <PlaylistMenu selectPlaylist={this.selectPlaylist}/>
                     <Header currentTab={this.state.currentTab} tabChange={this.tabChange} slide={this.state.slide}/>
                     <SearchBar slide={this.state.slide} searchResultsList={this.filterList} />

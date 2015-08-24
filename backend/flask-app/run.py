@@ -40,3 +40,4 @@ def audio_stream(videoId):
 if __name__ == '__main__':
     playlists_manager.load_playlist_modules()
     app.run(host= '192.168.1.151')
+    # app.run(host= '0.0.0.0')
