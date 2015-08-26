@@ -31,7 +31,7 @@ var App = React.createClass({
             resultsList: [],
             filteredList: [],
             loading_playlist: false,
-            item_to_play: null
+            item_to_play: {'url':null,  'song_name':''}
         };
     },
     tabChange: function(currentTab){
@@ -59,13 +59,17 @@ var App = React.createClass({
             this.setState({filteredList: filteredList})
         }
     },
-    updatePlayer:function(item_to_play){
+    updatePlayer:function(item_to_play, song_name){
          fetch('/audio_stream/'+item_to_play)
           .then(function(response) {
             return response.text()
           }).then(function(body) {
             var json_results = JSON.parse(body)
-            this.setState({item_to_play:"http://192.168.1.151:8080/audio/"+ json_results.results+ ".mp3"})
+            this.setState({item_to_play:{
+               "url": "http://192.168.1.151:8080/audio/"+ json_results.results+ ".mp3",
+                "song_name" : song_name
+                }
+            })
           }.bind(this));
     },
     render: function(){

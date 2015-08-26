@@ -4,8 +4,8 @@ var React = require('react')
 
 var ResutlsList = React.createClass({
 
-    resultItemSelected: function(url_audio_to_request){
-        this.props.updatePlayer(url_audio_to_request)
+    resultItemSelected: function(url_audio_to_request, song_name){
+        this.props.updatePlayer(url_audio_to_request, song_name)
     },
     render: function() {
         return(

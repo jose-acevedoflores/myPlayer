@@ -1,5 +1,5 @@
 'use strict';
-
+require('./AudioPlayer.css')
 var React = require('react');
 
 
@@ -137,7 +137,9 @@ var AudioPlayer = React.createClass({
         <audio ref="player" preload={this.props.preload}>
           <source src={this.props.src} type={this.props.mimeType} />
         </audio>
-        <i onClick={this.togglePlayPause} className={this.state.playing ? "fa fa-pause fa-2x" :  "fa fa-play fa-2x"}></i>
+          
+        <i onClick={this.togglePlayPause} className={this.state.playing ? "control fa fa-pause fa-2x" :  "control fa fa-play fa-2x"}></i>
+        <h4 className="selected-track"> {this.props.song_playing}</h4>
       </div>
     );
   }
