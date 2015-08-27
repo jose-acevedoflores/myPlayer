@@ -58,6 +58,15 @@ var App = React.createClass({
             // If there is no string in the search field then filtered list is equal to all the results
             this.setState({filteredList: filteredList})
         }
+        else if(event_identifier == "enter_event"){
+            fetch('/search/'+searchString)
+              .then(function(response) {
+                return response.text()
+              }).then(function(body) {
+                var playlist_data = JSON.parse(body).results
+                this.setState({resultsList: playlist_data, filteredList: playlist_data})
+            }.bind(this));
+        }
     },
     updatePlayer:function(item_to_play, song_name){
          fetch('/audio_stream/'+item_to_play)
@@ -66,7 +75,7 @@ var App = React.createClass({
           }).then(function(body) {
             var json_results = JSON.parse(body)
             this.setState({item_to_play:{
-               "url": "http://192.168.1.151:8080/audio/"+ json_results.results+ ".mp3",
+               "url": "http://192.168.1.151:8081/audio/"+ json_results.results+ ".mp3",
                 "song_name" : song_name
                 }
             })
@@ -78,7 +87,7 @@ var App = React.createClass({
                 <div className="main-wrapper">
                     <PlaylistMenu selectPlaylist={this.selectPlaylist}/>
                     <Header currentTab={this.state.currentTab} tabChange={this.tabChange} slide={this.state.slide}/>
-                    <SearchBar slide={this.state.slide} searchResultsList={this.filterList} />
+                    <SearchBar slide={this.state.slide} searchResultsList={this.filterList} currentTab={this.state.currentTab}/>
 
                     <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist} updatePlayer={this.updatePlayer}/>
 
