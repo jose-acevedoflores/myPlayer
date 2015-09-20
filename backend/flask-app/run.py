@@ -2,12 +2,19 @@ from flask import Flask, render_template, jsonify, request, session, url_for,red
 import ast
 import modules.playlistsManager as playlists_manager
 import modules.handleyt as yt_handler
+import sys, os
 
 app = Flask(__name__)
+host='0.0.0.0'
+host_port='5000'
+audio_stream_port='8081'
 
 @app.route('/')
 def index():
-    return send_from_directory('static/dist', 'index.html')
+    complete_path = os.path.realpath(__file__)+'/../static/dist'
+    complete_path = os.path.abspath(complete_path)
+    print complete_path
+    return send_from_directory(complete_path, 'index.html')
 
 @app.route('/get_playlists')
 def get_playlists():
@@ -35,9 +42,18 @@ def search(query):
 @app.route('/audio_stream/<videoId>')
 def audio_stream(videoId):
     yt_handler.download_vid(videoId, "https://www.youtube.com/watch?v="+videoId)
-    return jsonify({"results":videoId})
+    return jsonify({"results":videoId, "hostIp":host, "audioStreamPort":audio_stream_port})
 
 if __name__ == '__main__':
+
     playlists_manager.load_playlist_modules()
-    app.run(host= '192.168.1.151')
-    # app.run(host= '0.0.0.0')
+
+    if sys.argv[1] != 'dev':
+        host = sys.argv[1] 
+        host_port = sys.argv[2]
+        audio_stream_port=sys.argv[3]
+        app.run(host=host, port=int(host_port))
+    else:
+        app.run(host= '0.0.0.0')
+
+

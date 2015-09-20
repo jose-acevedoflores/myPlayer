@@ -5,8 +5,9 @@
   "main": "./app/index.js",
   "private": true,
   "scripts": {
-    "build": "webpack --config webpack.build.js --bail -p",
-    "dev": "webpack-dev-server --history-api-fallback --hot --inline --progress --host 0.0.0.0",
+    "build": "python ../backend/flask-app/run.py 192.168.1.151 5050 8081 & http-server ../backend/flask-app/static -p 8081 & webpack --config webpack.build.js --bail -p",
+    "serv":  "python ../backend/flask-app/run.py 192.168.1.151 5050 8081 & http-server ../backend/flask-app/static -p 8081",
+    "dev": "python ../backend/flask-app/run.py dev & http-server ../backend/flask-app/static -p 8081 & webpack-dev-server --history-api-fallback --hot --inline --progress --host 0.0.0.0",
     "test": "npm run test:unit",
     "test:unit": "karma start",
     "test:unit:live": "karma start --auto-watch --no-single-run"

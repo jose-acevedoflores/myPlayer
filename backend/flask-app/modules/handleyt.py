@@ -16,7 +16,8 @@ api_parameter= "part=snippet&maxResults=1"
 
 
 # ********** taken from http://willdrevo.com/downloading-youtube-and-soundcloud-audio-with-python-and-pandas/
-savedir = "static/audio"
+savedir = os.path.realpath(__file__) + "/../../static/audio"
+savedir = os.path.abspath(savedir)
 if not os.path.exists(savedir):
     os.makedirs(savedir)
 
