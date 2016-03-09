@@ -4,8 +4,17 @@ var React = require('react')
 
 var ResutlsList = React.createClass({
 
+    getInitialState: function () {        
+        return {
+            currentPlaying:0
+        };
+    },
     resultItemSelected: function(url_audio_to_request, song_name){
+        console.log('list')
+        console.log(url_audio_to_request)
         this.props.updatePlayer(url_audio_to_request, song_name)
+        this.setState({currentPlaying:url_audio_to_request})
+        
     },
     render: function() {
         return(
@@ -14,8 +23,8 @@ var ResutlsList = React.createClass({
                    <div className="results">
                     {this.props.resultsList.map(function(resultItem){
                         return (
-                            
-                            <ResultsItem key={resultItem.id} resultsItem={resultItem} resultItemSelected={this.resultItemSelected} />
+
+                            <ResultsItem currentPlaying={this.state.currentPlaying} key={resultItem.id} resultsItem={resultItem} resultItemSelected={this.resultItemSelected} />
                         )
                     }.bind(this))}
                     </div>
