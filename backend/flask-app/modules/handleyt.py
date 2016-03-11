@@ -41,11 +41,10 @@ def search(query, maxResults=1):
 
     # Iterate over the results (right now returns the first youtube hit)
     # if multiple > 0:
-    #     map(lambda vid: {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]} ,resp.json()['items'])
-    vids = map(lambda vid: {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]} ,resp.json()['items'])
-    return vids[0]
-    # for vid in resp.json()['items']:
-    #     return {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]}
+    # vids = map(lambda vid: {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]} ,resp.json()['items'])
+    # return vids[0]
+    for vid in resp.json()['items']:
+        return {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]}
 
     return None
 

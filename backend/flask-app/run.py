@@ -3,6 +3,7 @@ import ast
 import modules.playlistsManager as playlists_manager
 import modules.handleyt as yt_handler
 import sys, os
+from optparse import OptionParser
 
 app = Flask(__name__)
 host='0.0.0.0'
@@ -46,14 +47,27 @@ def audio_stream(videoId):
 
 if __name__ == '__main__':
 
-    playlists_manager.load_playlist_modules()
+    parser = OptionParser()
+    parser.add_option("-p", "--server_port",
+                  action="store", type="string", dest="server_port", help="Port that the server will run from")
+    parser.add_option("-a", "--audio_stream_port",
+                  action="store", type="string", dest="audio_stream_port", help="Port for the static audio server")
+    parser.add_option("-i", "--server_ip",
+                  action="store", type="string", dest="server_ip", help="Host IP")
+    parser.add_option("--dev", action="store_true", help="Developer view. Accept all conections (host=0.0.0.0)")
 
-    if sys.argv[1] != 'dev':
-        host = sys.argv[1] 
-        host_port = sys.argv[2]
-        audio_stream_port=sys.argv[3]
+    (options, args) = parser.parse_args()
+
+    playlists_manager.load_playlist_modules()
+    if options.server_port and options.audio_stream_port and options.server_ip:
+
+        host_port = options.server_port
+        audio_stream_port = options.audio_stream_port
+        host = options.server_ip
         app.run(host=host, port=int(host_port))
-    else:
+    elif options.dev: 
         app.run(host= '0.0.0.0')
+    else:
+        parser.print_help()
 
 

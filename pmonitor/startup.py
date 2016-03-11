@@ -21,7 +21,7 @@ def build():
 def start():
 
     server_app_path = os.path.abspath('../backend/flask-app/run.py')
-    server = subprocess.Popen(["python", server_app_path, "192.168.1.152", "5050", "8081"])
+    server = subprocess.Popen(["python", server_app_path, "-i", "192.168.1.152", "-p", "5050","-a", "8081"])
     atexit.register(kill_child, server)
 
     static_content_path = os.path.abspath('../backend/flask-app/static')
@@ -39,11 +39,21 @@ if __name__ == '__main__':
                       help="Compile UI and start server")
     parser.add_option("-b", "--build", action="store_true",
                       help="Build website content")
-
+    parser.add_option("--clean", action="store_true",
+                      help="Delete static/audio folder")
     (options, args) = parser.parse_args()
 
     if options.start:
         start()
-    if options.build:
+    elif options.build:
         build()
+    elif options.clean:
+        audio_path = os.path.abspath('../backend/flask-app/static/audio')
+        for root,_,files in os.walk(audio_path):
+            if len(files) == 0:
+                print audio_path+' -- Directory is clean'
+            for _file in files:
+                os.remove(os.path.join(root,_file))
+    else:
+        parser.print_help()
 
