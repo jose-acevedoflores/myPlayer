@@ -1,6 +1,7 @@
 import cherrypy
 import os
 import ast
+from optparse import OptionParser
 
 # custom imports
 import modules.playlistsManager as playlists_manager
@@ -40,10 +41,7 @@ class Root:
         return {"results": playlists_manager.fetch_playlist_module(results_dictionary['name']).fetch_results() }
 
 
-host = '192.168.1.152'
-audio_stream_port = '8080'
 if __name__ == '__main__':
-    playlists_manager.load_playlist_modules()
     
     conf = {
         '/': {
@@ -61,5 +59,35 @@ if __name__ == '__main__':
              'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static','audio')
          }
      }
-    cherrypy.config.update({'server.socket_host': host })
-    cherrypy.quickstart(Root(), '/', config=conf)
+
+
+    parser = OptionParser()
+    parser.add_option("-p", "--server_port",
+                  action="store", type="string", dest="server_port", help="Port that the server will run from")
+    parser.add_option("-i", "--server_ip",
+                  action="store", type="string", dest="server_ip", help="Host IP")
+    parser.add_option("--dev", action="store_true", help="Developer view. Accept all conections (host=0.0.0.0)")
+
+    (options, args) = parser.parse_args()
+
+    playlists_manager.load_playlist_modules()
+
+    if options.server_port and options.server_ip:
+
+        host_port = options.server_port
+        audio_stream_port = options.server_port
+        host = options.server_ip
+
+        cherrypy.config.update({'server.socket_host': host , 'server.socket_port': int(host_port)})
+        cherrypy.quickstart(Root(), '/', config=conf)
+    elif options.dev: 
+        print 'dev not configured'
+    else:
+        parser.print_help()
+
+
+
+
+
+
+
