@@ -12,7 +12,7 @@ except ImportError:
 
 yt_api_url = "https://www.googleapis.com/youtube/v3/search"
 yt_api_key = config.youtube_api_key
-api_parameter= "part=snippet&maxResults=2"
+api_parameter= "part=snippet&type=video&maxResults="
 
 
 # ********** taken from http://willdrevo.com/downloading-youtube-and-soundcloud-audio-with-python-and-pandas/
@@ -36,17 +36,15 @@ def search(query, maxResults=1):
 			Dictionary with the required attributes (defined in the get_results )
     """
     # api_parameter += maxResults
-    url = yt_api_url+"?"+yt_api_key+"&"+api_parameter+"&q="+query.replace('&','')
+    query = query.replace('&','')
+    query = query.replace(' ','+')
+    url = yt_api_url+"?"+yt_api_key+"&"+api_parameter+str(maxResults)+"&q="+query
     resp = requests.get(url)
 
     # Iterate over the results (right now returns the first youtube hit)
-    # if multiple > 0:
-    # vids = map(lambda vid: {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]} ,resp.json()['items'])
-    # return vids[0]
-    for vid in resp.json()['items']:
-        return {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]}
+    vids = map(lambda vid: {"name":vid['snippet']['title'], "url":vid['id']['videoId'], "thumbnail_url":vid['snippet']['thumbnails']['default']["url"]}, resp.json()['items'])
+    return vids
 
-    return None
 
 def download_vid(videoId, full_url):
     # Download video and strip audio from vid 

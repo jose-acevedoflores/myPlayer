@@ -24,8 +24,9 @@ def fetch_results():
     results = []
     index=0
     for query in source_parser():
-        yt_search_result = yt_handler.search(query)
-        if yt_search_result is not None:
+        yt_search_result = yt_handler.search(query, maxResults=1)
+        if len(yt_search_result) > 0 and yt_search_result[0] is not None:
+            yt_search_result = yt_search_result[0]
             results.append(dict(id=index,url=yt_search_result['url'], name=yt_search_result['name'], thumbnail_url=yt_search_result['thumbnail_url'] ) )
             index+=1
     return results
@@ -40,10 +41,7 @@ def source_parser():
 def _get_twitter_feed():
     """ Queries the twitter feed for the last 10 posts """
     resp = requests.get(url, headers=headers)
-    results =[]
-    for element in resp.json():
-        results.append(_parse_tweet(element))
-    return results
+    return map(lambda element: _parse_tweet(element), resp.json())
 
 def _parse_tweet(tweet):
     """ Given a tweet (single item from the twitter rest api GET query) get the name of the song if it's a valid tweet 

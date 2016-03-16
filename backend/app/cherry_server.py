@@ -12,20 +12,18 @@ class Root:
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def get_playlists(self):
-
-        playlists = []
-        for index,playlist_name in enumerate(playlists_manager.playlist_table.keys()):
-            playlists.append({"name":playlist_name, "id":index})
-
+        playlists = map(lambda index, playlist_name: {"name":playlist_name, "id":index} , 
+            range(len(playlists_manager.playlist_table.keys())), 
+            playlists_manager.playlist_table.keys() 
+            ) 
         return {'results':playlists}
 
 
     @cherrypy.expose
     @cherrypy.tools.json_out()
     def search(self, query):
-        results=[]
-        yt_search_result = yt_handler.search(query)
-        results.append(dict(id=0, url=yt_search_result['url'], name=yt_search_result['name'], thumbnail_url=yt_search_result['thumbnail_url']) )
+        yt_search_results = yt_handler.search(query, maxResults=4)
+        results = map(lambda index, yt_search_result: dict(id=index, url=yt_search_result['url'], name=yt_search_result['name'], thumbnail_url=yt_search_result['thumbnail_url']) , range(len(yt_search_results)), yt_search_results )
         return {'results': results}
 
     @cherrypy.expose

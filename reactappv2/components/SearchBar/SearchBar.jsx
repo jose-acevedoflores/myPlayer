@@ -15,7 +15,6 @@ var SearchBar = React.createClass({
         this.props.searchResultsList(event.target.value, "key_event")
     },
     handleSearch: function(event){
-        console.log('jbadfns fdnkl')
            if (this.props.currentTab == 1 && event.key == 'Enter' ){
             this.props.searchResultsList(event.target.value, "enter_event")
         }
