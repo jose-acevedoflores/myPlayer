@@ -10,7 +10,7 @@
     "babel-preset-react": "~6.5.0"
   },
   "scripts": {
-    "start": "watchify index.js -v -t browserify-css -t babelify -o ../backend/flask-app/static/dist/bundle.js"
+    "start": "watchify index.js -v -t browserify-css -t babelify -o ../backend/app/static/dist/bundle.js"
   },
   "devDependencies": {
     "browserify-css": "~0.9.1"

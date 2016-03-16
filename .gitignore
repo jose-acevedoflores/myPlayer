@@ -2,6 +2,6 @@
 *.log
 coverage
 node_modules/
-backend/flask-app/instance
-backend/flask-app/static/dist
-backend/flask-app/static/audio
+backend/app/instance
+backend/app/static/dist
+backend/app/static/audio
