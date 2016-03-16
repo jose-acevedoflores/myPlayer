@@ -40,7 +40,7 @@ class Root:
         return {"results": playlists_manager.fetch_playlist_module(results_dictionary['name']).fetch_results() }
 
 
-host = '0.0.0.0'
+host = '192.168.1.152'
 audio_stream_port = '8080'
 if __name__ == '__main__':
     playlists_manager.load_playlist_modules()
@@ -48,7 +48,7 @@ if __name__ == '__main__':
     conf = {
         '/': {
              'tools.staticdir.on': True,
-             'tools.staticdir.dir': os.path.join(os.path.join(os.path.abspath(os.getcwd()),'static'),'dist'),
+             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static', 'dist'),
              'tools.staticdir.index': 'index.html'
          },
       
@@ -58,7 +58,8 @@ if __name__ == '__main__':
          },
          '/audio': {
              'tools.staticdir.on': True,
-             'tools.staticdir.dir': os.path.join(os.path.join(os.path.abspath(os.getcwd()),'static'),'audio')
+             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static','audio')
          }
      }
+    cherrypy.config.update({'server.socket_host': host })
     cherrypy.quickstart(Root(), '/', config=conf)

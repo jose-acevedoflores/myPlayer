@@ -6,6 +6,8 @@ var SearchBar = require('../SearchBar')
 var PlaylistMenu = require('../PlaylistMenu')
 var ResultsList = require('../ResultsList')
 var React = require('react')
+var ReactDOM = require('react-dom');
+
 
 
 var App = React.createClass({
@@ -100,7 +102,7 @@ var App = React.createClass({
 
 
 
-React.render(
+ReactDOM.render(
     <App />,
-    document.body
+    document.getElementById('body_node')
 );

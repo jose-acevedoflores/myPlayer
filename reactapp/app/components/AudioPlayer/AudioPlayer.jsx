@@ -115,6 +115,7 @@ var AudioPlayer = React.createClass({
   },
 
   audioEnded: function() {
+    console.log('vjashijcknvjbkdashjcvnkbjkfeahdjcnvk')
     this.setState({
       playing: false
     });
