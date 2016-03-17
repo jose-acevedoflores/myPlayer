@@ -9,7 +9,7 @@ var Player = React.createClass({
          return(
 
                 <nav className={this.props.slide  ? "fixed-nav-bar-bottom slide":"fixed-nav-bar-bottom no-slide"}>
-                  <AudioPlayer src={this.props.item_to_play.url} song_playing={this.props.item_to_play.song_name}/>
+                  <AudioPlayer src={this.props.item_to_play.url} song_playing={this.props.item_to_play.song_name} play_next={this.props.play_next}/>
                 </nav>
 
         )

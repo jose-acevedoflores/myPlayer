@@ -30,10 +30,11 @@ var App = React.createClass({
         return {
             currentTab: 1,
             slide: false,
+            currentPlaying: 0,
             resultsList: [],
             filteredList: [],
             loading_playlist: false,
-            item_to_play: {'url':null,  'song_name':''}
+            item_to_play: {'url':null,  'song_name':'', "result_list_index":''}
         };
     },
     tabChange: function(currentTab){
@@ -70,7 +71,7 @@ var App = React.createClass({
             }.bind(this));
         }
     },
-    updatePlayer:function(item_to_play, song_name){
+    updatePlayer:function(item_to_play, song_name, result_list_index){
          fetch('/audio_stream/'+item_to_play)
           .then(function(response) {
             return response.text()
@@ -78,10 +79,17 @@ var App = React.createClass({
             var json_results = JSON.parse(body)
             this.setState({item_to_play:{
                "url": "http://"+json_results.hostIp+":"+json_results.audioStreamPort+"/audio/"+ json_results.results+ ".mp3",
-                "song_name" : song_name
-                }
+                "song_name" : song_name,
+                "result_list_index": result_list_index
+                },currentPlaying: item_to_play
+
             })
           }.bind(this));
+    },
+    play_next:function(){
+        var next = (this.state.item_to_play["result_list_index"]+1)%this.state.resultsList.length
+        var next_item = this.state.resultsList[next]
+        this.updatePlayer(next_item["url"], next_item["name"], next_item["id"])
     },
     render: function(){
         return(
@@ -91,9 +99,9 @@ var App = React.createClass({
                     <Header currentTab={this.state.currentTab} tabChange={this.tabChange} slide={this.state.slide}/>
                     <SearchBar slide={this.state.slide} searchResultsList={this.filterList} currentTab={this.state.currentTab}/>
 
-                    <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist} updatePlayer={this.updatePlayer}/>
+                    <ResultsList slide={this.state.slide} resultsList={this.state.filteredList} loading_playlist={this.state.loading_playlist} updatePlayer={this.updatePlayer} currentPlaying={this.state.currentPlaying}/>
 
-                    <Player  item_to_play={this.state.item_to_play} slide={this.state.slide} />
+                    <Player  item_to_play={this.state.item_to_play} slide={this.state.slide} play_next={this.play_next} />
                 </div>
             </div>
         );

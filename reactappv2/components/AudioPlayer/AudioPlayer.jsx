@@ -114,10 +114,10 @@ var AudioPlayer = React.createClass({
   },
 
   audioEnded: function() {
-    console.log('vjashijcknvjbkdashjcvnkbjkfeahdjcnvk')
     this.setState({
       playing: false
     });
+    this.props.play_next()
   },
 
   togglePlayPause: function() {
