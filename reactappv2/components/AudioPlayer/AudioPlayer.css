@@ -13,3 +13,19 @@
     margin-left: 16px;
     margin-top: 12px;
 }
+
+.player-data-horizontal{
+    display: flex;
+    flex-direction:column;
+    margin-left: 20px;
+    width: 100%;
+}
+
+h6 {
+    color:#fff;
+}
+
+.selected-track-name {
+    margin-bottom: -30px;
+    margin-top:2px;
+}

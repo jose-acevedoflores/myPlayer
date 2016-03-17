@@ -11,7 +11,7 @@ def fetch_results():
 	results = []
 	index=0
 	for query in source_parser():
-		yt_search_result = yt_handler.search(query)
+		yt_search_result = yt_handler.search(query)[0]
 		results.append(dict(id=index, url=yt_search_result['url'], name=yt_search_result['name'], thumbnail_url=yt_search_result['thumbnail_url']) )
 		index+=1
 	return results

@@ -1,7 +1,7 @@
 'use strict';
 require('./AudioPlayer.css')
 var React = require('react');
-
+import Slider from 'material-ui/lib/slider';
 
 var AudioPlayer = React.createClass({
 
@@ -34,7 +34,8 @@ var AudioPlayer = React.createClass({
       lt:7.6,
       rt:0,
       playing: false,
-      canPlay: false
+      canPlay: false,
+      slider_value: 0
     }
   },
 
@@ -109,8 +110,16 @@ var AudioPlayer = React.createClass({
     }
     this.setState({
       lt:tapeLeft,
-      rt:tapeRight
+      rt:tapeRight,
+      slider_value: rt
     });
+  },
+  slider_changed: function(e, value){
+    this.setState({
+      slider_value: value
+    });
+    var playerElement = this.refs.player;
+    playerElement.currentTime = value*playerElement.duration
   },
 
   audioEnded: function() {
@@ -139,7 +148,10 @@ var AudioPlayer = React.createClass({
         </audio>
           
         <i onClick={this.togglePlayPause} className={this.state.playing ? "control fa fa-pause fa-2x" :  "control fa fa-play fa-2x"}></i>
-        <h4 className="selected-track"> {this.props.song_playing}</h4>
+        <div className="player-data-horizontal">
+          <h6 className="selected-track-name"> {this.props.song_playing}</h6>
+          <Slider value={this.state.slider_value} onChange={this.slider_changed}/>
+        </div>
       </div>
     );
   }
