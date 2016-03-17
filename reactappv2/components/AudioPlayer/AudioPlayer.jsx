@@ -31,8 +31,6 @@ var AudioPlayer = React.createClass({
 
   getInitialState: function() {
     return {
-      lt:7.6,
-      rt:0,
       playing: false,
       canPlay: false,
       slider_value: 0
@@ -71,12 +69,6 @@ var AudioPlayer = React.createClass({
   },
 
   audioPlay: function() {
-    try {
-      var audioElements = document.getElementsByTagName('audio');
-      for(var i = 0; i < audioElements.length; i++) {
-        audioElements[i].pause();
-      }
-    } catch(e) {}
     this.refs.player.play();
     this.setState({
       playing: true
@@ -93,8 +85,6 @@ var AudioPlayer = React.createClass({
   audioLoad: function() {
     this.refs.player.load();
     this.setState({
-      lt:7.6,
-      rt:0,
       playing: false,
       canPlay: false
     });
@@ -103,14 +93,7 @@ var AudioPlayer = React.createClass({
   audioUpdate: function() {
     var playerElement = this.refs.player;
     var rt = playerElement.currentTime / playerElement.duration;
-    var tapeLeft = 7.6 * (1 - rt);
-    var tapeRight = 7.6 - tapeLeft;
-    if(tapeLeft < 0.07) {
-      tapeLeft = 0.07;
-    }
     this.setState({
-      lt:tapeLeft,
-      rt:tapeRight,
       slider_value: rt
     });
   },
