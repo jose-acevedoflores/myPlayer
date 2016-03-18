@@ -1,10 +1,37 @@
-.my-panel{
-    margin-left: 20px;
-    margin-top: 20px;
-    margin-right: 20px;
+.list-item{
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    border-top: 1px solid #e3e3e3;
+   
 }
-
+.list-item:first-child {
+    border-top: none;
+}
 .currentPlaying{
 
-    background-color: #a9a9a9
+    background-color: #EBEBEB
+}
+
+.resultImage{
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+}
+
+.resultInfo{
+    display: flex;
+    flex-direction: column;
+    margin-left: 10px;
+    justify-content: center;
+    /*Needs overflow otherwise when slide is on letters are seen in the playlist menu*/
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.resultTitle{
+    margin-bottom: 4px;
+    color: #333;
+    font-size: 14px;
+    white-space: nowrap;
 }

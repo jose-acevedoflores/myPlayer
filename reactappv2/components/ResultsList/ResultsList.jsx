@@ -5,7 +5,6 @@ var React = require('react')
 var ResutlsList = React.createClass({
 
     resultItemSelected: function(url_audio_to_request, song_name, result_list_index){
-        console.log('list')
         console.log(url_audio_to_request)
         this.props.updatePlayer(url_audio_to_request, song_name, result_list_index)
         

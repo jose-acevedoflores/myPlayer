@@ -19,6 +19,9 @@
     flex-direction:column;
     margin-left: 20px;
     width: 100%;
+    /*Needs overflow otherwise when slide is on letters are seen in the playlist menu*/
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 h6 {
@@ -28,4 +31,5 @@ h6 {
 .selected-track-name {
     margin-bottom: -30px;
     margin-top:2px;
+    white-space: nowrap;
 }

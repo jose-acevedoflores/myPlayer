@@ -9,9 +9,13 @@ var ResultsItem = React.createClass({
     },
     render: function() {
         return(
-           <div className={this.props.currentPlaying == this.props.resultsItem.url ? "mui-panel my-panel currentPlaying" : "mui-panel my-panel "} onClick={this.handleClick.bind(this, this.props.resultsItem.url, this.props.resultsItem.name, this.props.result_list_index)}>
-                <span><img src={this.props.resultsItem.thumbnail_url }/> </span>
-                <span className="mui-divider-left"> { this.props.resultsItem.name}</span>    
+           <div className={this.props.currentPlaying == this.props.resultsItem.url ? " list-item currentPlaying" : " list-item "} onClick={this.handleClick.bind(this, this.props.resultsItem.url, this.props.resultsItem.name, this.props.result_list_index)}>
+                <img className="resultImage" src={this.props.resultsItem.thumbnail_url }/> 
+                <div className="resultInfo">
+                    <div className="resultTitle">
+                    { this.props.resultsItem.name}
+                    </div>
+                </div>
             </div>
          )
     }

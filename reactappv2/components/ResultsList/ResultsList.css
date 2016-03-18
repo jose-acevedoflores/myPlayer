@@ -5,7 +5,10 @@
 
 .results{
     background-color: #fff;
+    /*Makes sure the last result fits in the page when scrolling*/
     margin-bottom: 50px;
+    /*Makes sure top element has some distance from the search bar*/
+    margin-top: 20px;
 }
 
 .mainbody{

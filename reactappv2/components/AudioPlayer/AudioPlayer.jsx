@@ -133,7 +133,12 @@ var AudioPlayer = React.createClass({
         <i onClick={this.togglePlayPause} className={this.state.playing ? "control fa fa-pause fa-2x" :  "control fa fa-play fa-2x"}></i>
         <div className="player-data-horizontal">
           <h6 className="selected-track-name"> {this.props.song_playing}</h6>
-          <Slider value={this.state.slider_value} onChange={this.slider_changed}/>
+
+           {(() => {
+            if (this.props.src) {
+              return <Slider value={this.state.slider_value} onChange={this.slider_changed}/>;
+            }
+          })()} 
         </div>
       </div>
     );
