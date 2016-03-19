@@ -19,7 +19,6 @@ var App = React.createClass({
             return response.text()
           }).then(function(body) {
             var playlist_data = JSON.parse(body).results
-            console.log(playlist_data)
             // Get rid of the loading gif
             this.setState({loading_playlist:false})
             this.setState({resultsList: playlist_data, filteredList: playlist_data})

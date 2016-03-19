@@ -3,8 +3,6 @@ var React = require('react')
 
 var ResultsItem = React.createClass({
     handleClick: function(url_audio_to_request, song_name, result_list_index){
-        console.log('item')
-        console.log(url_audio_to_request)
         this.props.resultItemSelected(url_audio_to_request, song_name, result_list_index )
     },
     render: function() {
