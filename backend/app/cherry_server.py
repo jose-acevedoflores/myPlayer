@@ -44,17 +44,17 @@ if __name__ == '__main__':
     conf = {
         '/': {
              'tools.staticdir.on': True,
-             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static', 'dist'),
+             'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.realpath(__file__)),'static', 'dist'),
              'tools.staticdir.index': 'index.html'
          },
       
          '/static': {
              'tools.staticdir.on': True,
-             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static')
+             'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.realpath(__file__)),'static')
          },
          '/audio': {
              'tools.staticdir.on': True,
-             'tools.staticdir.dir': os.path.join(os.path.abspath(os.getcwd()),'static','audio')
+             'tools.staticdir.dir': os.path.join(os.path.dirname(os.path.realpath(__file__)),'static','audio')
          }
      }
 
