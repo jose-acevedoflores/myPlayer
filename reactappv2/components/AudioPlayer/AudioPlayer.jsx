@@ -1,6 +1,9 @@
 'use strict';
 require('./AudioPlayer.css')
 var React = require('react');
+
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Slider from 'material-ui/Slider';
 
 var AudioPlayer = React.createClass({
@@ -136,7 +139,10 @@ var AudioPlayer = React.createClass({
 
            {(() => {
             if (this.props.src) {
-              return <Slider value={this.state.slider_value} onChange={this.slider_changed}/>;
+            
+                return (<MuiThemeProvider muiTheme={getMuiTheme()}>
+        <Slider muiTheme={getMuiTheme()} value={this.state.slider_value} onChange={this.slider_changed}/>
+      </MuiThemeProvider>)
             }
           })()} 
         </div>
