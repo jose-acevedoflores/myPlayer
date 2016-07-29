@@ -111,5 +111,5 @@ var App = React.createClass({
 
 ReactDOM.render(
     <App />,
-    document.getElementById('body_node')
+    document.getElementById('app_root')
 );

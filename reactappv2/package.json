@@ -11,7 +11,8 @@
     "material-ui": "~0.15.0-alpha.1"
   },
   "scripts": {
-    "start": "watchify index.js -v -t browserify-css -t babelify -o ../backend/app/static/dist/bundle.js"
+    "start": "watchify index.js -v -t browserify-css -t babelify -o ../backend/app/static/dist/bundle.js",
+    "init":"mkdir ../backend/app/static; mkdir ../backend/app/static/dist; cp -p index.html ../backend/app/static/dist"
   },
   "devDependencies": {
     "browserify-css": "~0.9.1"

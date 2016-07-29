@@ -1,7 +1,7 @@
 'use strict';
 require('./AudioPlayer.css')
 var React = require('react');
-import Slider from 'material-ui/lib/slider';
+import Slider from 'material-ui/Slider';
 
 var AudioPlayer = React.createClass({
 
