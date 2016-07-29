@@ -77,7 +77,7 @@ var App = React.createClass({
           }).then(function(body) {
             var json_results = JSON.parse(body)
             this.setState({item_to_play:{
-               "url": "http://"+json_results.hostIp+":"+json_results.audioStreamPort+"/audio/"+ json_results.results+ ".mp3",
+               "url": "/audio/"+ json_results.results+ ".mp3",
                 "song_name" : song_name,
                 "result_list_index": result_list_index
                 },currentPlaying: item_to_play
