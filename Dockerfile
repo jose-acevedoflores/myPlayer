@@ -5,6 +5,7 @@ RUN apt-get update; \
     apt-get install -y python; \
     apt-get install -y python-pip; \
     pip install -y youtube-dl; \
+    pip install cherrypy; \
     apt-get install -y nodejs-legacy; \
-    apt-get install -y npm \
+    apt-get install -y npm; \
     mkdir /home/web; \
