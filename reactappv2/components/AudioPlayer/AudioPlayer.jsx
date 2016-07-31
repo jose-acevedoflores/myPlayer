@@ -11,24 +11,14 @@ var AudioPlayer = React.createClass({
   propTypes: {
     preload: React.PropTypes.string,
     mimeType: React.PropTypes.string,
-    labelColor: React.PropTypes.string,
-    tapeColor: React.PropTypes.string,
-    cassetteColor: React.PropTypes.string,
-    controlsColor: React.PropTypes.string,
-    containerClass: React.PropTypes.string,
-    scaleMethod: React.PropTypes.string
+    containerClass: React.PropTypes.string
   },
 
   getDefaultProps: function() {
     return {
       preload: 'metadata',
       mimeType: 'audio/mpeg',
-      labelColor: '#fff',
-      tapeColor: '#333',
-      cassetteColor: '#333',
-      controlsColor: '#999',
-      containerClass: 'react-cassette-player',
-      scaleMethod: 'meet'
+      containerClass: 'react-cassette-player'
     }
   },
 
@@ -141,8 +131,8 @@ var AudioPlayer = React.createClass({
             if (this.props.src) {
             
                 return (<MuiThemeProvider muiTheme={getMuiTheme()}>
-        <Slider muiTheme={getMuiTheme()} value={this.state.slider_value} onChange={this.slider_changed}/>
-      </MuiThemeProvider>)
+                          <Slider value={this.state.slider_value} onChange={this.slider_changed}/>
+                      </MuiThemeProvider>)
             }
           })()} 
         </div>

@@ -5,3 +5,4 @@ node_modules/
 backend/app/instance
 backend/app/static/dist
 backend/app/static/audio
+node_modules
